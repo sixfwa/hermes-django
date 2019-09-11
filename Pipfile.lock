@@ -4,7 +4,9 @@
             "sha256": "d52828ca638d5b7d32b023ac5d338a554d8573f061b3fe9c496c9f2b83398be8"
         },
         "pipfile-spec": 6,
-        "requires": {},
+        "requires": {
+            "python_version": "3.7"
+        },
         "sources": [
             {
                 "name": "pypi",
@@ -40,3 +42,4 @@
     },
     "develop": {}
 }
+
