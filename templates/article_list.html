@@ -6,7 +6,8 @@
 {% for article in object_list %}
 <div class="card">
     <div class="card-header">
-        <span class="font-weight-bold">{{ article.title }}</span>&middot;
+        <span class="font-weight-bold"><a
+                href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></span>&middot;
         <span class="text-muted">by {{ article.author }} |
             {{ article.date }}
         </span>
@@ -14,9 +15,12 @@
     <div class="card-body">
         {{ article.body }}
     </div>
+    {% if user.pk == article.pk %}
     <div class="card-footer text-center text-muted">
-        <a href="#">Edit</a> | <a href="#">Delete</a>
+        <a href="{% url 'article_edit' article.pk %}">Edit</a> |
+        <a href="{% url 'article_delete' article.pk %}">Delete</a>
     </div>
+    {% endif %}
 </div>
 <br />
 {% endfor %}

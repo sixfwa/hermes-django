@@ -2,12 +2,13 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-{% if user.is_authenticated %}
-Hi {{ user.username }}
-<p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> |
-<a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+<div class="jumbotron">
+    <h1 class="display-4">Project Hermes</h1>
+    <p class="lead">A simple blogging app built with Django.</p>
+    <p class="lead">
+        <a href="{% url 'article_list' %}" class="btn btn-dark btn-lg" role="button">
+            View All Posts
+        </a>
+    </p>
+</div>
 {% endblock content %}
