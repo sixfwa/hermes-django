@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.CompressedManifestStaticFilesStorage'
 
 # Tells Django to use my new custom user model in place of the built-in User model.
 AUTH_USER_MODEL = 'users.CustomUser'
