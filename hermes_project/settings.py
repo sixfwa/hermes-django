@@ -26,7 +26,7 @@ SECRET_KEY = 'dccf#d7@@9zuxaqgv)bh=i0ffpev$*(f5ow+wxdk+(*=l)wl!%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['cryptic-scrubland-68540.herokuapp.com']
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,10 +90,6 @@ DATABASES = {
     }
 }
 
-import dj_database_url
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
-
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
@@ -128,8 +125,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Tells Django to use my new custom user model in place of the built-in User model.
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -144,4 +148,8 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = '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'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+import dj_database_url
+prod_db = dj_database_url.config(conn_max=500)
+DATABASES['default'].update(prod_db)
 
