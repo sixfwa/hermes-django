@@ -1,0 +1,1 @@
+web: gunicorn hermes_project.wsgi --log-file-
